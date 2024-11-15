@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator db {
+  provider = "go run github.com/steebchen/prisma-client-go"
+}
+
+model Tag {
+  id         Int      @id @default(autoincrement())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  name      String
+  tag       String
+  billable  String
+  useremail String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  name        String
+  tag         String
+  billable    Boolean
+  startAt     String
+  endAt       String
+  projectName String
+  totalTime   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
